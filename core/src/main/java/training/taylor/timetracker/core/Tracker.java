@@ -1,34 +1,30 @@
 package training.taylor.timetracker.core;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.test.context.SpringBootTest;
 import training.taylor.timetracker.core.dao.TimeEntry;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
 
-@Component
-public class Tracker {
+@SpringBootTest(classes = TrackerCoreConfig.class) // Load the configuration explicitly
+public class TrackerTest {
+
     @Autowired
-    private List<TimeEntry> entries = new ArrayList<>();
+    private Tracker tracker;
 
-    public void add(TimeEntry entry) {
-        entries.add(entry);
+    @Test
+    void testAdd() {
+        TimeEntry entry = new TimeEntry();
+        tracker.add(entry);
+        assertEquals(1, tracker.size());
     }
 
-    public void remove(TimeEntry entry) {
-        entries.remove(entry);
-    }
-
-    public int size() {
-        return entries.size();
-    }
-
-    public TimeEntry get(int index) {
-        try {
-            return entries.get(index);
-        } catch (IndexOutOfBoundsException e) {
-            throw new IllegalArgumentException("Index out of bounds: " + index, e);
-        }
+    @Test
+    void testRemove() {
+        TimeEntry entry = new TimeEntry();
+        tracker.add(entry);
+        tracker.remove(entry);
+        assertEquals(0, tracker.size());
     }
 }
