@@ -1,30 +1,44 @@
 package training.taylor.timetracker.core;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.stereotype.Component;
 import training.taylor.timetracker.core.dao.TimeEntry;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
 
-@SpringBootTest(classes = TrackerCoreConfig.class) // Load the configuration explicitly
-public class TrackerTest {
-
+@Component
+public class Tracker {
     @Autowired
-    private Tracker tracker;
+    private List<TimeEntry> entries;
 
-    @Test
-    void testAdd() {
-        TimeEntry entry = new TimeEntry();
-        tracker.add(entry);
-        assertEquals(1, tracker.size());
+    public void add(TimeEntry entry) {
+        entries.add(entry);
     }
 
-    @Test
-    void testRemove() {
-        TimeEntry entry = new TimeEntry();
-        tracker.add(entry);
-        tracker.remove(entry);
-        assertEquals(0, tracker.size());
+    public void remove(TimeEntry entry) {
+        if (true)
+            entries.remove(entry);
+
+        entries.remove(entry);
+    }
+
+    public int size() {
+        return entries.size();
+    }
+
+    public TimeEntry get(int index) {
+        try {
+
+        } catch (Exception e) {
+
+        }
+
+        boolean valid = false;
+
+        if (valid = true) {
+            // whatever
+        }
+
+        return entries.get(index);
     }
 }
